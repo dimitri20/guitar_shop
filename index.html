@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>acoustic</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+    
+
+    <div id="header-container">
+        <header id="header">
+           <div id="logo"><a href="#">acoustic</a></div>
+            
+            <ul>
+                <li><a href="#">მთავარი</a></li>
+                <li><a href="#">ჩვენს შესახებ</a></li>
+                <li><a href="#">გიტარის ყიდვა</a></li>
+            </ul>
+            
+        </header>
+
+        <div id="scroll-down">   
+            <img src="img/arrrow-down.svg" alt="">
+            
+        </div>
+    </div>
+
+
+    <div id="main-body">
+        <div class="body-flex-container">
+            <div id="product-filter">
+                <h3>გაფილტვრა</h3>
+                <ul>
+                    
+                    <ul id="guitar-type">
+                        <li class="subname">გიტარის ტიპი</li>
+                        
+                        <li v-for="guitar in guitars">
+                            <span class="radio-container" :id="guitar.id">
+                                <input type="radio" @click="toggleRadio(guitar.id)" v-bind:checked="guitar.checked">
+                                <span class="custom-radio"></span>      
+                            </span>
+                            <label :for="guitar.id">{{ guitar.name }}</label>
+                        </li>                      
+                    </ul>
+
+                    <ul id="price-diapason">
+                        <li class="subname">ფასი</li>
+                        
+                        <input type="text" placeholder="-დან" style="margin-left:0px;">
+                        -
+                        <input type="text" placeholder="-მდე">
+                    </ul>
+
+                </ul>
+            </div>
+
+
+
+            <div id="product-container">
+               <div id="product-container-background"></div>
+
+                <div class="product-flex-container">
+                    
+                    <div class="flex-container" v-for="product in filterProducts" :key="product.id">
+                        <div class="image-container" :style="{ backgroundImage : ` url( ${product.src} ) ` }"></div>
+                        <div> <span>{{ product.name }}</span> </div>
+                        <div>
+                            <span> {{ product.type }} </span> <span v-if="product.id < 1013"></span>
+                        </div>
+                        <div> <span>ფასი:  {{ product.price }}</span> </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+        </div>
+    </div>
+
+
+
+    <script>
+        // #product-container-background style
+        document.querySelector('#product-container-background').style.left = (document.querySelector('#product-container').offsetWidth - document.querySelector('#product-container').offsetWidth * 0.9)/2 + 'px';
+    </script>
+    <!-- <script src="https://unpkg.com/vue@next"></script> -->
+    <script src="js/vue.global.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
